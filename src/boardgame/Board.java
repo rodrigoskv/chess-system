@@ -35,8 +35,9 @@ public class Board {
 		if(!positionExists(position)) {
 			throw new BoardException("A posição não está no tabuleiro");
 		}
-		return pieces[getRows()][getColumns()];
+		return pieces[position.getRow()][position.getColumn()];
 	}
+
 	
 	public void placePiece(Piece piece, Position position) {
 		if(thereIsAPiece(position)) {
