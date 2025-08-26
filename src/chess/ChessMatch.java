@@ -8,6 +8,7 @@ import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.King;
+import chess.pieces.Pawn;
 import chess.pieces.Rook;
 
 public class ChessMatch {
@@ -27,7 +28,7 @@ public class ChessMatch {
 		board = new Board(8, 8);
 		turn = 1;
 		currentPlayer = Color.WHITE;
-		initialSetuo();
+		initialSetup();
 	}
 	public int getTurn() {
 		return turn;
@@ -62,25 +63,27 @@ public class ChessMatch {
 	}
 
 	public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
-		Position source = sourcePosition.toPosition();
-		Position target = targetPosition.toPosition();
-		validateSourcePosition(source);
-		validateTargetPosition(source, target);
-		Piece capturedPiece = makeMove(source, target);
-		
-		if (testCheck(currentPlayer)) {
-			undoMove(source, target, capturedPiece);
-			throw new ChessException("Você não pode se colocar em xeque");
-		}
-		check = (testCheck(opponent(currentPlayer))) ? true : false;
-		
-		if (testCheckMate(opponent(currentPlayer))) {
-		    checkMate = true;
-		} else {
-		    nextTurn();
-		}
-		return (ChessPiece) board.piece(target);
+	    Position source = sourcePosition.toPosition();
+	    Position target = targetPosition.toPosition();
+	    validateSourcePosition(source);
+	    validateTargetPosition(source, target);
+
+	    Piece capturedPiece = makeMove(source, target);
+
+	    if (testCheck(currentPlayer)) {
+	        undoMove(source, target, capturedPiece);
+	        throw new ChessException("Você não pode se colocar em xeque");
+	    }
+	    check = testCheck(opponent(currentPlayer));
+
+	    if (testCheckMate(opponent(currentPlayer))) {
+	        checkMate = true;
+	    } else {
+	        nextTurn();
+	    }
+	    return (ChessPiece) capturedPiece;
 	}
+	
 
 	private void validateSourcePosition(Position position) {
 		if (!board.thereIsAPiece(position)) {
@@ -189,16 +192,26 @@ public class ChessMatch {
 		piecesOnTheBoard.add(piece);
 	}
 
-	private void initialSetuo() {
+	private void initialSetup() {
 	    // Rei branco
-	    placeNewPiece('d', 1, new King(board, Color.WHITE));
+	    placeNewPiece('e', 1, new King(board, Color.WHITE));
 
-	    // Torres brancas em 7ª linha (escadinha)
-	    placeNewPiece('h', 7, new Rook(board, Color.WHITE));
-	    placeNewPiece('g', 7, new Rook(board, Color.WHITE));
+	    // Rei preto
+	    placeNewPiece('e', 8, new King(board, Color.BLACK));
 
-	    // Rei preto encurralado
-	    placeNewPiece('d', 8, new King(board, Color.BLACK));
+	    // --- Peões brancos ---
+	    placeNewPiece('d', 2, new Pawn(board, Color.WHITE)); // pode andar 1 ou 2
+	    placeNewPiece('f', 4, new Pawn(board, Color.WHITE)); // pode capturar
+
+	    // --- Peões pretos ---
+	    placeNewPiece('c', 7, new Pawn(board, Color.BLACK)); // pode andar 1 ou 2
+	    placeNewPiece('g', 5, new Pawn(board, Color.BLACK)); // pode capturar
+
+	    // --- Peças inimigas para capturas ---
+	    placeNewPiece('g', 6, new Rook(board, Color.BLACK)); // alvo do peão branco em f4
+	    placeNewPiece('f', 3, new Rook(board, Color.WHITE)); // alvo do peão preto em g5
 	}
+
+
 
 }
