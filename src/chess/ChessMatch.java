@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import boardgame.Board;
 import boardgame.Piece;
 import boardgame.Position;
+import chess.pieces.Bishop;
 import chess.pieces.King;
 import chess.pieces.Pawn;
 import chess.pieces.Rook;
@@ -195,6 +196,7 @@ public class ChessMatch {
 	private void initialSetup() {
 	    // Rei branco
 	    placeNewPiece('e', 1, new King(board, Color.WHITE));
+	    placeNewPiece('c',1, new Bishop(board, Color.WHITE));
 
 	    // Rei preto
 	    placeNewPiece('e', 8, new King(board, Color.BLACK));
