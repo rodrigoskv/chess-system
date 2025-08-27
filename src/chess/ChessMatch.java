@@ -11,6 +11,7 @@ import chess.pieces.Bishop;
 import chess.pieces.King;
 import chess.pieces.Knight;
 import chess.pieces.Pawn;
+import chess.pieces.Queen;
 import chess.pieces.Rook;
 
 public class ChessMatch {
@@ -195,27 +196,35 @@ public class ChessMatch {
 	}
 
 	private void initialSetup() {
-	    // Rei branco
-	    placeNewPiece('e', 1, new King(board, Color.WHITE));
-	    placeNewPiece('c',1, new Bishop(board, Color.WHITE));
-	    placeNewPiece('b',1, new Knight(board, Color.WHITE));
+		// --- Peças Brancas ---
+		placeNewPiece('a', 1, new Rook(board, Color.WHITE));
+		placeNewPiece('b', 1, new Knight(board, Color.WHITE));
+		placeNewPiece('c', 1, new Bishop(board, Color.WHITE));
+		placeNewPiece('d', 1, new Queen(board, Color.WHITE));
+		placeNewPiece('e', 1, new King(board, Color.WHITE));
+		placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
+		placeNewPiece('g', 1, new Knight(board, Color.WHITE));
+		placeNewPiece('h', 1, new Rook(board, Color.WHITE));
 
-	    // Rei preto
-	    placeNewPiece('e', 8, new King(board, Color.BLACK));
+		// Peões brancos
+		for (char i = 'a'; i <= 'h'; i++) {
+		    placeNewPiece(i, 2, new Pawn(board, Color.WHITE));
+		}
 
-	    // --- Peões brancos ---
-	    placeNewPiece('d', 2, new Pawn(board, Color.WHITE)); // pode andar 1 ou 2
-	    placeNewPiece('f', 4, new Pawn(board, Color.WHITE)); // pode capturar
+		// --- Peças Pretas ---
+		placeNewPiece('a', 8, new Rook(board, Color.BLACK));
+		placeNewPiece('b', 8, new Knight(board, Color.BLACK));
+		placeNewPiece('c', 8, new Bishop(board, Color.BLACK));
+		placeNewPiece('d', 8, new Queen(board, Color.BLACK));
+		placeNewPiece('e', 8, new King(board, Color.BLACK));
+		placeNewPiece('f', 8, new Bishop(board, Color.BLACK));
+		placeNewPiece('g', 8, new Knight(board, Color.BLACK));
+		placeNewPiece('h', 8, new Rook(board, Color.BLACK));
 
-	    // --- Peões pretos ---
-	    placeNewPiece('c', 7, new Pawn(board, Color.BLACK)); // pode andar 1 ou 2
-	    placeNewPiece('g', 5, new Pawn(board, Color.BLACK)); // pode capturar
-
-	    // --- Peças inimigas para capturas ---
-	    placeNewPiece('g', 6, new Rook(board, Color.BLACK)); // alvo do peão branco em f4
-	    placeNewPiece('f', 3, new Rook(board, Color.WHITE)); // alvo do peão preto em g5
+		// Peões pretos
+		for (char i = 'a'; i <= 'h'; i++) {
+		    placeNewPiece(i, 7, new Pawn(board, Color.BLACK));
+		}
 	}
-
-
 
 }
