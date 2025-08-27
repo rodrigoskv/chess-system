@@ -9,6 +9,7 @@ import boardgame.Piece;
 import boardgame.Position;
 import chess.pieces.Bishop;
 import chess.pieces.King;
+import chess.pieces.Knight;
 import chess.pieces.Pawn;
 import chess.pieces.Rook;
 
@@ -197,6 +198,7 @@ public class ChessMatch {
 	    // Rei branco
 	    placeNewPiece('e', 1, new King(board, Color.WHITE));
 	    placeNewPiece('c',1, new Bishop(board, Color.WHITE));
+	    placeNewPiece('b',1, new Knight(board, Color.WHITE));
 
 	    // Rei preto
 	    placeNewPiece('e', 8, new King(board, Color.BLACK));
