@@ -14,4 +14,11 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>engine/stockfish.exe</name>
+			<type>1</type>
+			<location>C:/Users/Keli Fernandes/Downloads/stockfish-windows-x86-64-avx2/stockfish/stockfish-windows-x86-64-avx2.exe</location>
+		</link>
+	</linkedResources>
 </projectDescription>
